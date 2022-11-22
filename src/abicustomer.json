@@ -1,0 +1,325 @@
+[
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "id_",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			}
+		],
+		"name": "CustomerAdded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "id_",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			}
+		],
+		"name": "CustomerDataUpdated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "id_",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "customerName",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "dataHash",
+				"type": "string"
+			}
+		],
+		"name": "DataHashUpdated",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "email",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "mobileNumber",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "id_",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "kycVerifiedBy",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "dataHash",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dataUpdatedOn",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Types.Customer",
+				"name": "customer_",
+				"type": "tuple"
+			}
+		],
+		"name": "addcustomer",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "id_",
+				"type": "address"
+			}
+		],
+		"name": "customerExists",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "exists_",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "id_",
+				"type": "address"
+			}
+		],
+		"name": "getcustomerdetails",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "email",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "mobileNumber",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "id_",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "kycVerifiedBy",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "dataHash",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dataUpdatedOn",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Types.Customer",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "id_",
+				"type": "address"
+			},
+			{
+				"internalType": "address[]",
+				"name": "customers_",
+				"type": "address[]"
+			}
+		],
+		"name": "searchcustomers",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "email",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "mobileNumber",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "id_",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "kycVerifiedBy",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "dataHash",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dataUpdatedOn",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Types.Customer",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "hash_",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "currentTime_",
+				"type": "uint256"
+			}
+		],
+		"name": "updatedatahash",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "id_",
+				"type": "address"
+			}
+		],
+		"name": "updatekycdoneby",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "name_",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email_",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "mobile_",
+				"type": "uint256"
+			}
+		],
+		"name": "updateprofile",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
+
+
+
