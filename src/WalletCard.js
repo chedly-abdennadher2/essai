@@ -34,15 +34,14 @@ window.ethereum.request({method:"eth_getBalance",params:[address,'latest']}).the
 setUserBalance(ethers.utils.formatEther (balance));
 const abicustomer= require("./abicustomer.json");
 const provider=new ethers.providers.Web3Provider(window.ethereum);
-const customer=new ethers.Contract(contractaddress,abicustomer,provider);
+const signer=provider.getSigner();
+
+const customer=new ethers.Contract(contractaddress,abicustomer,signer);
 customer.functions.customerExists(address).then (result=>{
 	alert (result);
 	});
-	customer.events.CustomerAdded({"id_":address,"name":"ali",email:"salah"}
-	, (error, data) => {
-alert (error);
-alert(data);			}		);
-		
+	
+
 
 })
 }
