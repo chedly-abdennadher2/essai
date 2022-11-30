@@ -1,0 +1,62 @@
+[
+	{
+		"inputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint16",
+						"name": "id",
+						"type": "uint16"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "enum Types.BankStatus",
+						"name": "status",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct Types.Bank",
+				"name": "num",
+				"type": "tuple"
+			}
+		],
+		"name": "store",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "retrieve",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint16",
+						"name": "id",
+						"type": "uint16"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "enum Types.BankStatus",
+						"name": "status",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct Types.Bank",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

@@ -1,14 +1,6 @@
 import {React,useState} from 'react';
 import {ethers} from 'ethers';
 const WalletCard =() =>{
-	const Bank = {
-		name: "alie",
-		email: "salah",
-		id_: "2",
-		ifscCode: "a",
-		kycCount: "e",
-		status:"active",
-	  };
 	
 	const [errorMessage,setErrorMessage]=useState(null);
 	const [defaultAccount,setDefaultAccount]=useState(null);
@@ -23,8 +15,8 @@ const WalletCard =() =>{
 	//contrat int 
 	//const contractaddress="0xe9846938c929ff21b8c9da194ec507c442445383";
 	//contract personalisé client
-	const contractaddress="0x6682e854877235dd42d63aef1afc14e5d0339c77";
-
+	const contractaddresscustomer="0x6682e854877235dd42d63aef1afc14e5d0339c77";
+    const contractaddressbank="0x6bc3e393b2ab466c4daf6e051124237e42f293a1";
 
 	const [connButtonText,setConnButtonText]=useState("Connect Wallet");
 	const connectwallethandler=()=>{
@@ -53,8 +45,8 @@ window.ethereum.request({method:"eth_getBalance",params:[address,'latest']}).the
 setUserBalance(ethers.utils.formatEther (balance));
 //const abicustomer= require("./abicustomer.json");
 //const abiint=require ("./abiint.json");
-const abicustomer2=require("./abiobjet.json");
-
+const abicustomer2=require("./abicustomerfonctionnel.json");
+const abibank = require ("./abibank.json");
 const provider=new ethers.providers.Web3Provider(window.ethereum);
 const signer=provider.getSigner();
 
@@ -72,11 +64,19 @@ customer.functions.customerExists(address).then (result=>{
 			alert (result);
 			});
 */
-const contrat1=new ethers.Contract(contractaddress,abicustomer2,signer);
-contrat1.functions.retrieve().then (result=>{
+const contratcustomer=new ethers.Contract(contractaddresscustomer,abicustomer2,signer);
+contratcustomer.functions.retrieve().then (result=>{
 	alert (result);
 	});		
-	contrat1.functions.store({"id":2,'name':'ali','email':'e','mobileNumber':345,"statut":"1"}).send().then (result=>{
+/*	contratcustomer.functions.store({"id":2,'name':'ali','email':'e','mobileNumber':345,"statut":"1"}).send().then (result=>{
+		alert (result);
+		});
+*/
+		const contratbank=new ethers.Contract(contractaddressbank,abibank,signer);
+	contratbank.functions.retrieve().then (result=>{
+	alert (result);
+	});		
+	contratbank.functions.store({"id":2,'name':'ali',"status":"1"}).send().then (result=>{
 		alert (result);
 		});
 
