@@ -18,9 +18,13 @@ const WalletCard =() =>{
 	const [provider, setProvider] = useState(null);
 	const [signer, setSigner] = useState(null);
 	const [contract, setContract] = useState(null);
-
-	const contractaddress="0x5e96189B017D9e88eC05134d54A055B3BAF0EdC0";
+      //customer erroné
+	//const contractaddress="0x8EBA552F705AF635a7152161696323D22E0503dC";
+	//contrat int 
 	//const contractaddress="0xe9846938c929ff21b8c9da194ec507c442445383";
+	//contract personalisé client
+	const contractaddress="0x6682e854877235dd42d63aef1afc14e5d0339c77";
+
 
 	const [connButtonText,setConnButtonText]=useState("Connect Wallet");
 	const connectwallethandler=()=>{
@@ -47,17 +51,34 @@ const getUserBalance=(address) =>
 {
 window.ethereum.request({method:"eth_getBalance",params:[address,'latest']}).then(balance=>{
 setUserBalance(ethers.utils.formatEther (balance));
-const abicustomer= require("./abicustomer.json");
+//const abicustomer= require("./abicustomer.json");
+//const abiint=require ("./abiint.json");
+const abicustomer2=require("./abiobjet.json");
+
 const provider=new ethers.providers.Web3Provider(window.ethereum);
 const signer=provider.getSigner();
 
-const customer=new ethers.Contract(contractaddress,abicustomer,signer);
+/*const customer=new ethers.Contract(contractaddress,abicustomer,signer);
 setContract(customer);
 
 customer.functions.customerExists(address).then (result=>{
 	alert (result);
 	});
-	
+*/	
+/*	const contrat1=new ethers.Contract(contractaddress,abiint,signer);
+	contrat1.functions.retrieve().then (result=>{
+		alert (result);
+		});		contrat1.functions.store(2).send().then (result=>{
+			alert (result);
+			});
+*/
+const contrat1=new ethers.Contract(contractaddress,abicustomer2,signer);
+contrat1.functions.retrieve().then (result=>{
+	alert (result);
+	});		
+	contrat1.functions.store({"id":2,'name':'ali','email':'e','mobileNumber':345,"statut":"1"}).send().then (result=>{
+		alert (result);
+		});
 
 
 })
@@ -81,20 +102,8 @@ return (
 		<button onClick ={connectwallethandler}>
 			{connButtonText} 
 		</button>
-		<div className="accountDisplay">
-		<h3> Address {defaultAccount} </h3>
-		</div>
-       <div className="balanceDisplay">
-		<h3> Balance {UserBalance} </h3>
-			{errorMessage}
-	   </div>
-	   <form onSubmit={setHandler}>
-				<input id="setText" type="text"/>
-				<button type={"submit"}> Update Contract </button>
-			</form>
-			<button onClick={getCurrentVal} style={{marginTop: '5em'}}> Get Current Contract Value </button>		
-			{currentContractVal}
-			{signer}
+	
+
 		</div>
 		
 	)

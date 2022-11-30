@@ -1,0 +1,82 @@
+[
+	{
+		"inputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint16",
+						"name": "id",
+						"type": "uint16"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "email",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "mobileNumber",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum Types.KycStatus",
+						"name": "statut",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct Types.Customer",
+				"name": "num",
+				"type": "tuple"
+			}
+		],
+		"name": "store",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "retrieve",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint16",
+						"name": "id",
+						"type": "uint16"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "email",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "mobileNumber",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum Types.KycStatus",
+						"name": "statut",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct Types.Customer",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
