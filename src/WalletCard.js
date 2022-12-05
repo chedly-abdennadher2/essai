@@ -6,6 +6,7 @@ const WalletCard =() =>{
 	var email="abc@gmail.com";
 	var mobilenumber=23455788;
 	var statut ="ok";
+	var banked={"id":1};
      var typeajout;
 	 var idbank=1;
 	 var nombank="abes";
@@ -102,8 +103,10 @@ else {
 		const provider=new ethers.providers.Web3Provider(window.ethereum);
 		const signer=provider.getSigner();
 		const contratbank=new ethers.Contract(contractaddressbank,abibank,signer);
-	contratbank.functions.retrieve().then (result=>{
-	alert (result);
+	contratbank.functions.retrieve().then( async(result)=>{
+	banked=result;
+	alert(result);
+	
 	});	
 	var banksave ={"id":idbank,"name":nombank,"status":statutbank};
 	
@@ -176,8 +179,9 @@ return (
 
 <input type="submit" value ="savecustomer"/>
 	</form>
+	{banked.id}
+
 		</div>
 	)
-	
 }
 export default WalletCard;
