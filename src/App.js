@@ -10,7 +10,6 @@ import {
 function App() {
   return (
 <div className="App">
-  <h1>connection metamask interface</h1>
   <WalletCard></WalletCard>
   
 </div>
