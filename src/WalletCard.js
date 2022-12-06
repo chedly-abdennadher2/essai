@@ -1,4 +1,4 @@
-import {React,useState} from 'react';
+import {React} from 'react';
 import {ethers} from 'ethers';
 const WalletCard =() =>{
 	var id=3;
@@ -6,28 +6,51 @@ const WalletCard =() =>{
 	var email="abc@gmail.com";
 	var mobilenumber=23455788;
 	var statut ="ok";
-	var banked={"id":1};
-     var typeajout;
 	 var idbank=1;
 	 var nombank="abes";
 	 var statutbank=1;
-	const [errorMessage,setErrorMessage]=useState(null);
-	const [defaultAccount,setDefaultAccount]=useState(null);
-	const [UserBalance,setUserBalance]=useState(null);
-	const [currentContractVal, setCurrentContractVal] = useState(null);
 
-	const [provider, setProvider] = useState(null);
-	const [signer, setSigner] = useState(null);
-	const [contract, setContract] = useState(null);
-      //customer erroné
+	   //customer erroné
 	//const contractaddress="0x8EBA552F705AF635a7152161696323D22E0503dC";
 	//contrat int 
 	//const contractaddress="0xe9846938c929ff21b8c9da194ec507c442445383";
 	//contract personalisé client
 	const contractaddresscustomer="0x6682e854877235dd42d63aef1afc14e5d0339c77";
     const contractaddressbank="0x6bc3e393b2ab466c4daf6e051124237e42f293a1";
+	const connectwallethandlerreadbank=(event)=>{
+		event.preventDefault();
 
-	const [connButtonText,setConnButtonText]=useState("Connect Wallet");
+	if (window.ethereum)
+	{
+	window.ethereum.request({method:"eth_requestAccounts"})
+	.then (result=>{
+		loadintheblockchain(result[0],"bank");
+
+	})
+	}
+	else 
+	{
+alert ("installer metamask");
+	}
+	}
+	
+	const connectwallethandlerreadcustomer=(event)=>{
+		event.preventDefault();
+
+	if (window.ethereum)
+	{
+	window.ethereum.request({method:"eth_requestAccounts"})
+	.then (result=>{
+		loadintheblockchain(result[0],"customer");
+
+	})
+	}
+	else 
+	{
+alert ("installer metamask");
+	}
+	}
+
 
 	const connectwallethandler2=(event)=>{
 		event.preventDefault();
@@ -39,13 +62,13 @@ const WalletCard =() =>{
 	{
 	window.ethereum.request({method:"eth_requestAccounts"})
 	.then (result=>{
-	accountChangedHandler(result[0],"bank");
-	
+		storeintheblockchain(result[0],"customer");
+
 	})
 	}
 	else 
 	{
-		setErrorMessage("vous n'avez pas metamask")
+alert ("installer metamask");
 	}
 	}
 
@@ -60,26 +83,20 @@ const WalletCard =() =>{
 	{
 	window.ethereum.request({method:"eth_requestAccounts"})
 	.then (result=>{
-	accountChangedHandler(result[0],"customer");
-	
+		storeintheblockchain(result[0],"customer");
+
 	})
 	}
 	else 
 	{
-		setErrorMessage("vous n'avez pas metamask")
+		alert("vous n'avez pas metamask");
 	}
-	}
-const accountChangedHandler=(newAccount,type)=>
-{
-setDefaultAccount(newAccount);
-getUserBalance(newAccount,type);
-
-}
-const getUserBalance=(address,type) =>
-{
 	
+	}
+
+const storeintheblockchain=(address,type) =>
+{	
 window.ethereum.request({method:"eth_getBalance",params:[address,'latest']}).then(balance=>{
-setUserBalance(ethers.utils.formatEther (balance));
 //const abicustomer= require("./abicustomer.json");
 //const abiint=require ("./abiint.json");
 if (type=="customer"){
@@ -87,9 +104,7 @@ if (type=="customer"){
 	const provider=new ethers.providers.Web3Provider(window.ethereum);
 	const signer=provider.getSigner();
 	const contratcustomer=new ethers.Contract(contractaddresscustomer,abicustomer2,signer);
-contratcustomer.functions.retrieve().then (result=>{
-	alert(result);
-	});
+	
 	var customersave ={"id":id,"name":nom,"email":email,"mobileNumber":mobilenumber,"statut":statut};
 
 
@@ -103,11 +118,7 @@ else {
 		const provider=new ethers.providers.Web3Provider(window.ethereum);
 		const signer=provider.getSigner();
 		const contratbank=new ethers.Contract(contractaddressbank,abibank,signer);
-	contratbank.functions.retrieve().then( async(result)=>{
-	banked=result;
-	alert(result);
 	
-	});	
 	var banksave ={"id":idbank,"name":nombank,"status":statutbank};
 	
 	contratbank.functions.store(banksave).send().then (result=>{
@@ -118,16 +129,38 @@ else {
 })
 }
 
-const setHandler = (event) => {
-	event.preventDefault();
-	console.log('sending ' + event.target.setText.value + ' to the contract');
-	contract.set(event.target.setText.value);
+const loadintheblockchain=(address,type) =>
+{	
+window.ethereum.request({method:"eth_getBalance",params:[address,'latest']}).then(balance=>{
+//const abicustomer= require("./abicustomer.json");
+//const abiint=require ("./abiint.json");
+if (type==="customer"){
+	const abicustomer2=require("./abicustomerfonctionnel.json");	
+	const provider=new ethers.providers.Web3Provider(window.ethereum);
+	const signer=provider.getSigner();
+	const contratcustomer=new ethers.Contract(contractaddresscustomer,abicustomer2,signer);
+contratcustomer.functions.retrieve().then (result=>{
+	alert(result);
+	});
+	
+
 }
+else {
+		const abibank = require ("./abibank.json");
+		const provider=new ethers.providers.Web3Provider(window.ethereum);
+		const signer=provider.getSigner();
+		const contratbank=new ethers.Contract(contractaddressbank,abibank,signer);
+	contratbank.functions.retrieve().then( async(result)=>{
+	alert(result);
+	
+	});	
+		}
+
+})
+}
+
  
-const getCurrentVal = async () => {
-	let val = await contract.get();
-	setCurrentContractVal(val);
-}
+
 
 return (
 		<div className="walletCard">
@@ -177,9 +210,12 @@ return (
 </div>
 
 
-<input type="submit" value ="savecustomer"/>
+<input type="submit" value ="savebank"/>
 	</form>
-	{banked.id}
+<br/> 
+	<button onClick ={connectwallethandlerreadcustomer}> readcustomer </button>
+<br/>
+	<button onClick ={connectwallethandlerreadbank}> readbank </button>
 
 		</div>
 	)
