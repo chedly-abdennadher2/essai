@@ -62,7 +62,7 @@ alert ("installer metamask");
 	{
 	window.ethereum.request({method:"eth_requestAccounts"})
 	.then (result=>{
-		storeintheblockchain(result[0],"customer");
+		storeintheblockchain(result[0],"bank");
 
 	})
 	}
